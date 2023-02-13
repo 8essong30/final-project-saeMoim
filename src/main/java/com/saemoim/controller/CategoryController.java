@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.saemoim.dto.request.CategoryRequestDto;
 import com.saemoim.dto.response.CategoryResponseDto;
 import com.saemoim.dto.response.StatusResponseDto;
+import com.saemoim.service.CategoryServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,35 +22,37 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CategoryController {
 
+	private final CategoryServiceImpl categoryService;
+
 	// 카테고리 조회
 	@GetMapping("/category")
 	public List<CategoryResponseDto> getCategories() {
-		return null;
+		return categoryService.getCategories();
 	}
 
 	// 카테고리 생성
 	@PostMapping("/admin/category")
 	public StatusResponseDto createCategory(@Validated @RequestBody CategoryRequestDto requestDto) {
-		return null;
+		return categoryService.createCategory(requestDto);
 	}
 
 	// 자식 카테고리 생성
 	@PostMapping("/admin/categories/{parentId}")
 	public StatusResponseDto createChildCategory(@PathVariable Long parentId,
 		@Validated @RequestBody CategoryRequestDto requestDto) {
-		return null;
+		return categoryService.createChildCategory(parentId, requestDto);
 	}
 
 	// 카테고리 수정
 	@PutMapping("/admin/categories/{categoryId}")
 	public StatusResponseDto updateCategory(@PathVariable Long categoryId,
 		@Validated @RequestBody CategoryRequestDto requestDto) {
-		return null;
+		return categoryService.updateCategory(categoryId, requestDto);
 	}
 
 	// 카테고리 삭제
 	@DeleteMapping("/admin/categories/{categoryId}")
 	public StatusResponseDto deleteCategory(@PathVariable Long categoryId) {
-		return null;
+		return categoryService.deleteCategory(categoryId);
 	}
 }

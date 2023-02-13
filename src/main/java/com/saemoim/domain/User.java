@@ -29,7 +29,7 @@ public class User extends TimeStamped {
 	@Column(nullable = false)
 	private String content;
 	@Column
-	private int reportCount;
+	private int banCount;
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private UserRoleEnum role;
@@ -40,5 +40,13 @@ public class User extends TimeStamped {
 		this.username = username;
 		this.role = role;
 		this.content = "안녕하세요. 잘 부탁드립니다.";
+	}
+
+	public void plusBanCount() {
+		this.banCount++;
+	}
+
+	public void updateStatus(UserRoleEnum role) {
+		this.role = role;
 	}
 }

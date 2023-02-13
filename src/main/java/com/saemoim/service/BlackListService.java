@@ -11,5 +11,9 @@ public interface BlackListService {
 
 	StatusResponseDto addBlacklist(Long userId);
 
+	StatusResponseDto imposePermanentBan(Long userId);
+
 	StatusResponseDto deleteBlacklist(Long userId);
+
+	void scheduledBlacklist();
 }
