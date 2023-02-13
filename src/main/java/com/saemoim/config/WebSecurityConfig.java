@@ -21,9 +21,9 @@ import com.saemoim.security.UserDetailsServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
+// @EnableMethodSecurity	// @Secured 어노테이션 활성화
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity	// @Secured 어노테이션 활성화
 @RequiredArgsConstructor
 public class WebSecurityConfig {
 
@@ -54,6 +54,7 @@ public class WebSecurityConfig {
 
 		// 내용 추가 필요함. 로그인 페이지, 회원가입 페이지 등
 		http.authorizeHttpRequests()
+			.requestMatchers("/email-verification").permitAll()
 			.requestMatchers("/sign-up").permitAll()
 			.requestMatchers("/sign-in").permitAll()
 			.requestMatchers("/admin/**").hasAnyRole("ADMIN")
@@ -63,8 +64,7 @@ public class WebSecurityConfig {
 		http.formLogin().disable();
 			// .loginPage("/로그인form url").permitAll();
 
-		// http.addFilterBefore(new CustomSecurityFilter(userDetailsService, passwordEncoder()),
-		// 	UsernamePasswordAuthenticationFilter.class);
+		// http.addFilterBefore(new CustomSecurityFilter(userDetailsService, passwordEncoder()), UsernamePasswordAuthenticationFilter.class);
 
 		// 접근 제한 페이지 이동
 		// http.exceptionHandling().accessDeniedPage("/api/user/forbidden");
