@@ -40,6 +40,7 @@ public class User extends TimeStamped {
 		this.username = username;
 		this.role = role;
 		this.content = "안녕하세요. 잘 부탁드립니다.";
+		this.banCount = 0;
 	}
 
 	public void plusBanCount() {

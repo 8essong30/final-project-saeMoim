@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.saemoim.dto.response.ApplicationResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,14 +20,14 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto applyGroup(Long groupId, String username) {
-		return null;
+	public void applyGroup(Long groupId, String username) {
+
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto cancelApplication(Long applicationId, String username) {
-		return null;
+	public void cancelApplication(Long applicationId, String username) {
+
 	}
 
 	@Transactional(readOnly = true)
@@ -39,13 +38,13 @@ public class ApplicationServiceImpl implements ApplicationService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto permitApplication(Long applicationId, String username) {
-		return null;
+	public void permitApplication(Long applicationId, String username) {
+
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto rejectApplication(Long applicationId, String username) {
-		return null;
+	public void rejectApplication(Long applicationId, String username) {
+
 	}
 }

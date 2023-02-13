@@ -4,16 +4,15 @@ import java.util.List;
 
 import com.saemoim.dto.request.CategoryRequestDto;
 import com.saemoim.dto.response.CategoryResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 public interface CategoryService {
 	List<CategoryResponseDto> getCategories();
 
-	StatusResponseDto createCategory(CategoryRequestDto requestDto);
+	void createCategory(CategoryRequestDto requestDto);
 
-	StatusResponseDto createChildCategory(Long parentId, CategoryRequestDto requestDto);
+	void createChildCategory(Long parentId, CategoryRequestDto requestDto);
 
-	StatusResponseDto updateCategory(Long categoryId, CategoryRequestDto requestDto);
+	void updateCategory(Long categoryId, CategoryRequestDto requestDto);
 
-	StatusResponseDto deleteCategory(Long categoryId);
+	void deleteCategory(Long categoryId);
 }

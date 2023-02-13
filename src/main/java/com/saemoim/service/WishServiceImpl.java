@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.saemoim.dto.response.MyGroupResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,13 +20,13 @@ public class WishServiceImpl implements WishService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto wishGroup(Long groupId, String username) {
-		return null;
+	public void wishGroup(Long groupId, String username) {
+
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto deleteWishGroup(Long groupId, String username) {
-		return null;
+	public void deleteWishGroup(Long groupId, String username) {
+
 	}
 }

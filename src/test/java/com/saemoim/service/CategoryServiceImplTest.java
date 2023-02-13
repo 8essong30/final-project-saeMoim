@@ -1,8 +1,14 @@
 package com.saemoim.service;
 
-import static org.assertj.core.api.AssertionsForClassTypes.*;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.anyString;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +20,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.HttpStatus;
 
 import com.saemoim.domain.Category;
 import com.saemoim.dto.request.CategoryRequestDto;
 import com.saemoim.dto.response.CategoryResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 import com.saemoim.exception.ErrorCode;
 import com.saemoim.repository.CategoryRepository;
 
@@ -66,12 +70,16 @@ class CategoryServiceImplTest {
 			.name("여행")
 			.build();
 
+		Category category = Category.builder()
+			.name(requestDto.getName())
+			.build();
+
 		when(categoryRepository.existsByName(anyString())).thenReturn(false);
+		when(categoryRepository.save(any(Category.class))).thenReturn(category);
 		//when
-		StatusResponseDto responseDto = categoryService.createCategory(requestDto);
+		categoryService.createCategory(requestDto);
 		//then
-		assertThat(responseDto.getHttpStatus()).isEqualTo(HttpStatus.OK);
-		assertThat(responseDto.getMessage()).isEqualTo(requestDto.getName() + " 카테고리 생성 완료");
+		verify(categoryRepository).save(any(Category.class));
 	}
 
 	@Test
@@ -103,14 +111,18 @@ class CategoryServiceImplTest {
 			.name("맛집")
 			.build();
 
+		Category category2 = Category.builder()
+			.parentId(1L)
+			.name("맛집")
+			.build();
+
 		when(categoryRepository.existsByName(anyString())).thenReturn(false);
 		when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(category));
+		when(categoryRepository.save(any(Category.class))).thenReturn(category2);
 		//when
-		StatusResponseDto responseDto = categoryService.createChildCategory(parentId, requestDto);
+		categoryService.createChildCategory(parentId, requestDto);
 		//then
-		assertThat(responseDto.getHttpStatus()).isEqualTo(HttpStatus.OK);
-		assertThat(responseDto.getMessage()).isEqualTo(requestDto.getName() + " 카테고리 생성 완료");
-
+		verify(categoryRepository).save(any(Category.class));
 	}
 
 	@Test
@@ -129,9 +141,8 @@ class CategoryServiceImplTest {
 		when(categoryRepository.findById(anyLong())).thenReturn(Optional.of(categoryMock));
 		doNothing().when(categoryMock).updateCategory(anyString());
 		//when
-		StatusResponseDto responseDto = categoryService.updateCategory(parentId, requestDto);
+		categoryService.updateCategory(parentId, requestDto);
 		//then
-		assertThat(responseDto.getHttpStatus()).isEqualTo(HttpStatus.OK);
 
 		verify(categoryMock).updateCategory(requestDto.getName());
 	}
@@ -151,9 +162,8 @@ class CategoryServiceImplTest {
 		doNothing().when(categoryRepository).delete(any(Category.class));
 
 		//when
-		StatusResponseDto responseDto = categoryService.deleteCategory(categoryId);
+		categoryService.deleteCategory(categoryId);
 		//then
-		assertThat(responseDto.getHttpStatus()).isEqualTo(HttpStatus.OK);
-		assertThat(responseDto.getMessage()).isEqualTo(category.getName() + " 카테고리 삭제 완료");
+		verify(categoryRepository).delete(category);
 	}
 }

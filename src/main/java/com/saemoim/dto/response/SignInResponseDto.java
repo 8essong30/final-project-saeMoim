@@ -7,11 +7,12 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class AuthenticatedUserDto {
+public class SignInResponseDto {
 
 	private String email;
 	private UserRoleEnum role;
-	public AuthenticatedUserDto(String email, UserRoleEnum role) {
+
+	public SignInResponseDto(String email, UserRoleEnum role) {
 		this.email = email;
 		this.role = role;
 	}

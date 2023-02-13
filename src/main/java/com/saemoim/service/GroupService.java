@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.saemoim.dto.request.GroupRequestDto;
 import com.saemoim.dto.response.GroupResponseDto;
+import com.saemoim.dto.response.MessageResponseDto;
 import com.saemoim.dto.response.MyGroupResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 public interface GroupService {
 	List<MyGroupResponseDto> getGroups();
@@ -20,10 +20,10 @@ public interface GroupService {
 
 	GroupResponseDto updateGroup(Long groupId, GroupRequestDto requestDto, String username);
 
-	StatusResponseDto deleteGroup(Long groupId, String username);
+	MessageResponseDto deleteGroup(Long groupId, String username);
 
-	StatusResponseDto openGroup(Long groupId, String username);
+	MessageResponseDto openGroup(Long groupId, String username);
 
-	StatusResponseDto closeGroup(Long groupId, String username);
+	MessageResponseDto closeGroup(Long groupId, String username);
 
 }

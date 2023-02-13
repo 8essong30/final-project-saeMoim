@@ -2,14 +2,12 @@ package com.saemoim.service;
 
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.saemoim.domain.Category;
 import com.saemoim.dto.request.CategoryRequestDto;
 import com.saemoim.dto.response.CategoryResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 import com.saemoim.exception.ErrorCode;
 import com.saemoim.repository.CategoryRepository;
 
@@ -31,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto createCategory(CategoryRequestDto requestDto) {
+	public void createCategory(CategoryRequestDto requestDto) {
 		if (categoryRepository.existsByName(requestDto.getName())) {
 			throw new IllegalArgumentException(ErrorCode.DUPLICATED_CATEGORY.getMessage());
 		}
@@ -41,12 +39,11 @@ public class CategoryServiceImpl implements CategoryService {
 			.build();
 
 		categoryRepository.save(category);
-		return new StatusResponseDto(HttpStatus.OK, category.getName() + " 카테고리 생성 완료");
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto createChildCategory(Long parentId, CategoryRequestDto requestDto) {
+	public void createChildCategory(Long parentId, CategoryRequestDto requestDto) {
 		if (categoryRepository.existsByName(requestDto.getName())) {
 			throw new IllegalArgumentException(ErrorCode.DUPLICATED_CATEGORY.getMessage());
 		}
@@ -65,12 +62,11 @@ public class CategoryServiceImpl implements CategoryService {
 			.build();
 
 		categoryRepository.save(category);
-		return new StatusResponseDto(HttpStatus.OK, category.getName() + " 카테고리 생성 완료");
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto updateCategory(Long categoryId, CategoryRequestDto requestDto) {
+	public void updateCategory(Long categoryId, CategoryRequestDto requestDto) {
 		if (categoryRepository.existsByName(requestDto.getName())) {
 			throw new IllegalArgumentException(ErrorCode.DUPLICATED_CATEGORY.getMessage());
 		}
@@ -81,12 +77,11 @@ public class CategoryServiceImpl implements CategoryService {
 
 		category.updateCategory(requestDto.getName());
 		categoryRepository.save(category);
-		return new StatusResponseDto(HttpStatus.OK, category.getName() + " 카테고리 수정 완료");
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto deleteCategory(Long categoryId) {
+	public void deleteCategory(Long categoryId) {
 		if (categoryRepository.existsByParentId(categoryId)) {
 			throw new IllegalArgumentException(ErrorCode.NOT_EMPTY_CATEGORY.getMessage());
 		}
@@ -95,8 +90,6 @@ public class CategoryServiceImpl implements CategoryService {
 			() -> new IllegalArgumentException(ErrorCode.NOT_EXIST_CATEGORY.getMessage())
 		);
 
-		String categoryName = category.getName();
 		categoryRepository.delete(category);
-		return new StatusResponseDto(HttpStatus.OK, categoryName + " 카테고리 삭제 완료");
 	}
 }

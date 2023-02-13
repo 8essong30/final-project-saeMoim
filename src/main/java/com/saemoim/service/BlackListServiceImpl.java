@@ -3,7 +3,6 @@ package com.saemoim.service;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +12,6 @@ import com.saemoim.domain.User;
 import com.saemoim.domain.enums.BlacklistStatusEnum;
 import com.saemoim.domain.enums.UserRoleEnum;
 import com.saemoim.dto.response.BlackListResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 import com.saemoim.exception.ErrorCode;
 import com.saemoim.repository.BlackListRepository;
 import com.saemoim.repository.UserRepository;
@@ -34,7 +32,7 @@ public class BlackListServiceImpl implements BlackListService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto addBlacklist(Long userId) {
+	public void addBlacklist(Long userId) {
 		User user = userRepository.findById(userId).orElseThrow(
 			() -> new IllegalArgumentException(ErrorCode.NOT_FOUND_USER.getMessage())
 		);
@@ -50,12 +48,11 @@ public class BlackListServiceImpl implements BlackListService {
 		BlackList blackList = new BlackList(user, status);
 
 		blackListRepository.save(blackList);
-		return new StatusResponseDto(HttpStatus.OK, user.getUsername() + " 블랙리스트 등록 완료");
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto imposePermanentBan(Long blacklistId) {
+	public void imposePermanentBan(Long blacklistId) {
 		BlackList find = blackListRepository.findById(blacklistId).orElseThrow(
 			() -> new IllegalArgumentException(ErrorCode.DUPLICATED_BLACKLIST.getMessage())
 		);
@@ -63,20 +60,16 @@ public class BlackListServiceImpl implements BlackListService {
 		find.updateStatus(BlacklistStatusEnum.PERMANENT_BAN);
 
 		blackListRepository.save(find);
-		return new StatusResponseDto(HttpStatus.OK, find.getUsername() + " 영구 블랙리스트 등록 완료");
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto deleteBlacklist(Long blacklistId) {
+	public void deleteBlacklist(Long blacklistId) {
 		BlackList blackList = blackListRepository.findById(blacklistId).orElseThrow(
 			() -> new IllegalArgumentException(ErrorCode.NOT_EXIST_BLACKLIST.getMessage())
 		);
 
-		String name = blackList.getUsername();
-
 		blackListRepository.delete(blackList);
-		return new StatusResponseDto(HttpStatus.OK, name + " 블랙리스트 해제 완료");
 	}
 
 	@Scheduled(cron = "${schedules.cron.reward.publish}")

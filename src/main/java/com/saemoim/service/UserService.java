@@ -3,18 +3,17 @@ package com.saemoim.service;
 import com.saemoim.dto.request.ProfileRequestDto;
 import com.saemoim.dto.request.SignInRequestDto;
 import com.saemoim.dto.request.SignUpRequestDto;
-import com.saemoim.dto.response.AuthenticatedUserDto;
 import com.saemoim.dto.response.ProfileResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
+import com.saemoim.dto.response.SignInResponseDto;
 
 public interface UserService {
-	StatusResponseDto signUp(SignUpRequestDto requestDto);
+	void signUp(SignUpRequestDto requestDto);
 
-	AuthenticatedUserDto signIn(SignInRequestDto requestDto);
+	SignInResponseDto signIn(SignInRequestDto requestDto);
 
-	StatusResponseDto logout(String username);
+	void logout(String username);
 
-	StatusResponseDto withdraw(String username);
+	void withdraw(String username);
 
 	ProfileResponseDto getProfile(Long userId);
 

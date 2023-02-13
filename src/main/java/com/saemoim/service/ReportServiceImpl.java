@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.saemoim.dto.request.ReportRequestDto;
 import com.saemoim.dto.response.ReportResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,8 +22,8 @@ public class ReportServiceImpl implements ReportService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto reportUser(Long subjectUserId, ReportRequestDto requestDto, String username) {
-		return null;
+	public void reportUser(Long subjectUserId, ReportRequestDto requestDto, String username) {
+
 	}
 
 }

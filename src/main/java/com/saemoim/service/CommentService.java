@@ -2,7 +2,6 @@ package com.saemoim.service;
 
 import com.saemoim.dto.request.CommentRequestDto;
 import com.saemoim.dto.response.CommentResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 public interface CommentService {
 
@@ -10,5 +9,5 @@ public interface CommentService {
 
 	CommentResponseDto updateComment(Long commentId, CommentRequestDto requestDto, String username);
 
-	StatusResponseDto deleteComment(Long commentId, String username);
+	void deleteComment(Long commentId, String username);
 }

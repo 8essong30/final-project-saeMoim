@@ -1,5 +1,6 @@
 package com.saemoim.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.saemoim.dto.request.CommentRequestDto;
 import com.saemoim.dto.response.CommentResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
+import com.saemoim.dto.response.MessageResponseDto;
 import com.saemoim.security.UserDetailsImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -35,7 +36,7 @@ public class CommentController {
 
 	// 댓글 삭제
 	@DeleteMapping("/comments/{commentId}")
-	public StatusResponseDto deleteComment(@PathVariable Long commentId,
+	public ResponseEntity<MessageResponseDto> deleteComment(@PathVariable Long commentId,
 		@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		return null;
 	}

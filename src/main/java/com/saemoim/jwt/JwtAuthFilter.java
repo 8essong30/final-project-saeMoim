@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.saemoim.dto.response.StatusResponseDto;
+import com.saemoim.exception.ExceptionResponseDto;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -26,20 +26,21 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 	private final JwtUtil jwtUtil;
 
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+		FilterChain filterChain) throws
 		ServletException, IOException {
 
 		String token = jwtUtil.resolveToken(request);
 
-		if(token != null) {
-			if(!jwtUtil.validateToken(token)){
+		if (token != null) {
+			if (!jwtUtil.validateToken(token)) {
 				jwtExceptionHandler(response, "Token Error", HttpStatus.UNAUTHORIZED);
 				return;
 			}
 			Claims info = jwtUtil.getUserInfoFromToken(token);
 			setAuthentication(info.getSubject());
 		}
-		filterChain.doFilter(request,response);
+		filterChain.doFilter(request, response);
 	}
 
 	public void setAuthentication(String username) {
@@ -54,7 +55,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 		response.setStatus(statusCode.value());
 		response.setContentType("application/json");
 		try {
-			String json = new ObjectMapper().writeValueAsString(new StatusResponseDto(statusCode, msg));
+			String json = new ObjectMapper().writeValueAsString(new ExceptionResponseDto(statusCode, msg));
 			response.getWriter().write(json);
 		} catch (Exception e) {
 			log.error(e.getMessage());

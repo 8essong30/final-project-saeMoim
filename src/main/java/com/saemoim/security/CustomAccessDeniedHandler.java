@@ -10,7 +10,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.saemoim.dto.response.StatusResponseDto;
+import com.saemoim.exception.ExceptionResponseDto;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,9 +19,8 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
-	private static final StatusResponseDto exceptionDto =
-		new StatusResponseDto(HttpStatus.FORBIDDEN, HttpStatus.FORBIDDEN.getReasonPhrase());
-
+	private static final ExceptionResponseDto exceptionDto =
+		new ExceptionResponseDto(HttpStatus.FORBIDDEN, HttpStatus.FORBIDDEN.getReasonPhrase());
 
 	@Override
 	public void handle(HttpServletRequest request, HttpServletResponse response,

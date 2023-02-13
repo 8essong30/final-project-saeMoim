@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.saemoim.dto.request.PostRequestDto;
 import com.saemoim.dto.response.PostResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -40,7 +39,7 @@ public class PostServiceImpl implements PostService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto deletePost(Long postId, String username) {
-		return null;
+	public void deletePost(Long postId, String username) {
+
 	}
 }

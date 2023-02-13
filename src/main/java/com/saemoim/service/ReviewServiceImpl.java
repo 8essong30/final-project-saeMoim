@@ -5,7 +5,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.saemoim.dto.request.ReviewRequestDto;
 import com.saemoim.dto.response.ReviewResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -26,7 +25,7 @@ public class ReviewServiceImpl implements ReviewService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto deleteReview(Long reviewId, String username) {
-		return null;
+	public void deleteReview(Long reviewId, String username) {
+
 	}
 }

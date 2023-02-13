@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.saemoim.dto.request.PostRequestDto;
 import com.saemoim.dto.response.PostResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 public interface PostService {
 	List<PostResponseDto> getAllPosts();
@@ -15,5 +14,5 @@ public interface PostService {
 
 	PostResponseDto updatePost(Long postId, PostRequestDto requestDto, String username);
 
-	StatusResponseDto deletePost(Long postId, String username);
+	void deletePost(Long postId, String username);
 }

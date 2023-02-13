@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.saemoim.dto.request.GroupRequestDto;
 import com.saemoim.dto.response.GroupResponseDto;
+import com.saemoim.dto.response.MessageResponseDto;
 import com.saemoim.dto.response.MyGroupResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 import com.saemoim.security.UserDetailsImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -66,21 +66,21 @@ public class GroupController {
 
 	// 모임 삭제
 	@DeleteMapping("/groups/{groupId}")
-	public StatusResponseDto deleteGroup(@PathVariable Long groupId,
+	public MessageResponseDto deleteGroup(@PathVariable Long groupId,
 		@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		return null;
 	}
 
 	// 모임 열기
 	@PatchMapping("/groups/{groupId}/open")
-	public StatusResponseDto openGroup(@PathVariable Long groupId,
+	public MessageResponseDto openGroup(@PathVariable Long groupId,
 		@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		return null;
 	}
 
 	// 모임 닫기
 	@PatchMapping("/groups/{groupId}/close")
-	public StatusResponseDto closeGroup(@PathVariable Long groupId,
+	public MessageResponseDto closeGroup(@PathVariable Long groupId,
 		@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		return null;
 	}

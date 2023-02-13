@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import com.saemoim.dto.response.StatusResponseDto;
 import com.saemoim.dto.response.UserResponseDto;
 
 public class AdminServiceImpl implements AdminService {
@@ -16,13 +15,13 @@ public class AdminServiceImpl implements AdminService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto deletePostByAdmin(Long postId) {
-		return null;
+	public void deletePostByAdmin(Long postId) {
+
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto deleteReviewByAdmin(Long reviewId) {
-		return null;
+	public void deleteReviewByAdmin(Long reviewId) {
+
 	}
 }

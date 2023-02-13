@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.saemoim.dto.request.GroupRequestDto;
 import com.saemoim.dto.response.GroupResponseDto;
+import com.saemoim.dto.response.MessageResponseDto;
 import com.saemoim.dto.response.MyGroupResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -53,19 +53,19 @@ public class GroupServiceImpl implements GroupService {
 
 	@Transactional
 	@Override
-	public StatusResponseDto deleteGroup(Long groupId, String username) {
+	public MessageResponseDto deleteGroup(Long groupId, String username) {
 		return null;
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto openGroup(Long groupId, String username) {
+	public MessageResponseDto openGroup(Long groupId, String username) {
 		return null;
 	}
 
 	@Transactional
 	@Override
-	public StatusResponseDto closeGroup(Long groupId, String username) {
+	public MessageResponseDto closeGroup(Long groupId, String username) {
 		return null;
 	}
 }

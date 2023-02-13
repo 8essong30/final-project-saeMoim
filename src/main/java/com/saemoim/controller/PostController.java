@@ -2,6 +2,7 @@ package com.saemoim.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.saemoim.dto.request.PostRequestDto;
+import com.saemoim.dto.response.MessageResponseDto;
 import com.saemoim.dto.response.PostResponseDto;
-import com.saemoim.dto.response.StatusResponseDto;
 import com.saemoim.security.UserDetailsImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -51,7 +52,7 @@ public class PostController {
 
 	// 게시글 삭제
 	@DeleteMapping("/posts/{postId}")
-	public StatusResponseDto deletePost(@PathVariable Long postId,
+	public ResponseEntity<MessageResponseDto> deletePost(@PathVariable Long postId,
 		@AuthenticationPrincipal UserDetailsImpl userDetails) {
 		return null;
 	}

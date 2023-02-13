@@ -10,15 +10,15 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.saemoim.dto.response.StatusResponseDto;
+import com.saemoim.exception.ExceptionResponseDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
-	private static final StatusResponseDto exceptionDto =
-		new StatusResponseDto(HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED.getReasonPhrase());
+	private static final ExceptionResponseDto exceptionDto =
+		new ExceptionResponseDto(HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED.getReasonPhrase());
 
 	@Override
 	public void commence(HttpServletRequest request,
